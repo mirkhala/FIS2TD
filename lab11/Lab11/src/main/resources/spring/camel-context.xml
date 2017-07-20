@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:camel="http://camel.apache.org/schema/spring"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <bean
+        class="org.springframework.boot.context.embedded.ServletRegistrationBean" id="camelServlet">
+        <property name="name" value="CamelServlet"/>
+        <property name="loadOnStartup" value="1"/>
+        <property name="servlet">
+            <bean
+                class="org.apache.camel.component.servlet.CamelHttpTransportServlet" id="camelServlet"/>
+        </property>
+        <property name="urlMappings" value="/*"/>
+    </bean>
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+        <restConfiguration component="servlet"/>
+        <rest path="/lab11">
+            <get outType="java.lang.String" produces="application/json" uri="/{text}">
+                <to uri="direct:cicd"/>
+            </get>
+        </rest>
+        <route id="simple-route">
+            <from id="_from1" uri="direct:cicd"/>
+            <log id="_log1" message="Received: ${header.text}"/>
+            <setBody id="_setBody1">
+                <simple>You sent this text: "${header.text}"</simple>
+            </setBody>
+        </route>
+    </camelContext>
+</beans>
