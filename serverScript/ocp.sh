@@ -21,6 +21,7 @@ oc delete project myproject
 oc project openshift
 oc create -f https://raw.githubusercontent.com/pszuster/FIS2TD/master/templates/fis-image-streams.json
 oc create -f https://raw.githubusercontent.com/pszuster/FIS2TD/master/templates/amq63-basic.json
+oc create -f https://raw.githubusercontent.com/pszuster/FIS2TD/master/templates/amq63-image-stream.json
 oc create -f https://raw.githubusercontent.com/pszuster/FIS2TD/master/templates/openjdk18-image-stream.json
 oc import-image jenkins-pablo --from=docker.io/openshift/jenkins-2-centos7 --confirm 
 oc delete template jenkins-persistent
