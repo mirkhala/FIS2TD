@@ -6,7 +6,7 @@
 "description": "Fuse - Web - Template",
 "tags": "java,springboot,fuse",
 "iconClass": "icon-jboss",
-"version": "2.0"
+"version": "latest"
 },
 "name": "fuse-web"
 },
